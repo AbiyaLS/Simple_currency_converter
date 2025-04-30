@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  
   const HomePage({super.key});
 
   @override
@@ -9,12 +8,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   double result = 0;
-    TextEditingController amountController = TextEditingController();
+  double result = 0;
+  TextEditingController amountController = TextEditingController();
+
+  void convert() {
+    setState(() {
+      result = double.parse(amountController.text) * 85;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     print("rebuild method running");
-   
 
     return Scaffold(
       backgroundColor: Colors.white54,
@@ -32,11 +37,11 @@ class _HomePageState extends State<HomePage> {
         children: [
           Center(
               child: Text(
-            result.toString(),
+           result % 1 ==0 ?result.toInt().toString() : result.toString(),
             style: TextStyle(
                 fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
           )),
-          // ----------------------------------------TEXT FIELD----------------------------------
+          // --------------------------------------FIELD----------------------------------
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
@@ -65,11 +70,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(10.0),
             child: ElevatedButton(
                 onPressed: () {
-                  setState(() {
-                    result = double.parse(amountController.text) * 85;
-                  });
-                  // result = double.parse(amountController.text) * 85;
-                  // print(result);
+                  convert();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
